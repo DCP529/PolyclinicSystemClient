@@ -1,0 +1,11 @@
+<div>
+
+    <div class="topnav">
+      <a [routerLink]="['/home']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+        *ngIf='isLoggedIn'>PolyclinicSystem</a>
+        <a [routerLink]="['/home']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+        *ngIf='isAdminPanel'>Edit</a>
+    </div>
+    
+    <router-outlet></router-outlet>
+  </div>

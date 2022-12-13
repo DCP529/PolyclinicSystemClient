@@ -1,0 +1,22 @@
+<mat-card class="register">
+
+  <h2>
+    Registration
+  </h2>
+
+  <mat-form-field class="form-field">
+    <mat-label>Email</mat-label>
+    <input type="email" matInput placeholder="user@mail.ru" #email>
+  </mat-form-field>
+  <mat-form-field class="form-field">
+    <mat-label>Password</mat-label>
+    <input type="password" matInput #password>
+  </mat-form-field>
+  <mat-form-field class="form-field">
+    <mat-label>Repeat password</mat-label>
+    <input type="password" matInput #repeatPassword>
+  </mat-form-field>
+  <button mat-flat-button color="primary"
+    (click)='registerQuery(email.value, password.value, repeatPassword.value)'>Register</button>
+  <button mat-flat-button color="primary" (click)='logout()'>Logout</button>
+</mat-card>

@@ -1,0 +1,45 @@
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    a {
+        float: left;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17 px;
+
+        &:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        &.active {
+            background-color: #4caf50;
+            color: white;
+        }
+    }
+}
+
+.register {
+    display: flex;
+    margin: 0 35%;
+    justify-content: center;
+    margin-top: 20%;
+    padding: 20px;
+    border: 1px solid rgb(221, 221, 221);
+
+    h2 {
+        font-size: 40px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    button{
+        margin-top: 10px;
+    }
+}

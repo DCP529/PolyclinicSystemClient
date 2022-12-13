@@ -1,0 +1,21 @@
+<base href="/">
+<mat-card *ngIf='!isLoggedIn' class="login">
+  <h2>
+    Authorization
+  </h2>
+  <mat-form-field class="form-field">
+
+    <mat-label>Email</mat-label>
+    <input type="email" matInput placeholder="user@mail.ru" #email>
+  </mat-form-field>
+  <mat-form-field class="form-field">
+    <mat-label>Password</mat-label>
+    <input type="password" matInput #password>
+  </mat-form-field>
+  <button mat-flat-button color="primary" (click)='login(email.value, password.value)'>Login</button>
+  <button mat-flat-button color="primary" (click)='registerButtonClick()'>Register</button>
+</mat-card>
+
+<mat-card *ngIf='isLoggedIn'>
+  <button mat-flat-button color="primary" (click)='logout()'>Logout</button>
+</mat-card>
