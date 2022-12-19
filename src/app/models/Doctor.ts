@@ -1,4 +1,5 @@
 import { Guid } from "guid-typescript";
+import { Polyclinic } from "./Polyclinic";
 
 export class Doctor{
     doctorId: Guid | undefined;
@@ -7,4 +8,5 @@ export class Doctor{
     contactNumber: number | undefined;
     shortDescription: string | undefined;
     fullDescription: string | undefined;
+    polyclinic: Polyclinic | undefined;
 }

@@ -18,6 +18,7 @@ import { AUTH_API_URL, STORE_API_URL } from './app-injection-tokens';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { EditComponent } from './components/edit/edit.component';
 
 export function tokenGetter(){
   return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -28,7 +29,8 @@ export function tokenGetter(){
     AppComponent,
     HomeComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,

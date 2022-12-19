@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class AppComponent {
     return this.as.isAuthenticated()
   }
 
-  constructor(private as: AuthService) {
+  constructor(private as: AuthService, private jwtHelper: JwtHelperService) {
 
   }
 
@@ -44,4 +45,14 @@ export class AppComponent {
   logout() {
     this.as.logout()
   }
+
+  public get isAdminPanel(): boolean{
+    var result =  this.jwtHelper.decodeToken(this.as.isAdminRole());
+
+    if(result.role == "User"){
+     return false
+    }
+
+   return true
+ }
 }
