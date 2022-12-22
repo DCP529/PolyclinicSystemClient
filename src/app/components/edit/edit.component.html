@@ -1,0 +1,120 @@
+<body>
+    <div class="box">
+        <div class="blur">
+
+            <div class="topnav">
+                <a href="Home" [routerLink]="['/home']" (click)='logout()'>Back</a>
+            </div>
+
+            <div class="tools">
+
+                <p class="models">Cities</p>
+                <div>
+                    <p class="add">Enter data for add:</p>
+                    <input type="text" placeholder="City name" matInput #addName>
+                    <button class="add" (click)='addCity(addName.value)'>Add</button>
+                </div>
+                <div>
+                    <p class="update">Enter data for update:</p>
+                    <input type="text" placeholder="City name" matInput #cityName>
+                    <input type="text" placeholder="Update city name" matInput #updateName>
+                    <button class="update" (click)='updateCity(cityName.value, updateName.value)'>Update</button>
+                </div>
+                <div>
+                    <p class="delete">Enter data for delete:</p>
+                    <input type="text" placeholder="City name" matInput #deleteName>
+                    <button class="delete" (click)='deleteCity(deleteName.value)'>Delete</button>
+                </div>
+                <p class="models">Polyclinics</p>
+                <div>
+                    <p class="add">Enter data for add:</p>
+                    <input type="text" placeholder="Polyclinic name" matInput #addPolyclinicName>
+                    <input type="text" placeholder="Address" matInput #addAddress>
+                    <input type="text" placeholder="Contact number" matInput #addContactNumber>
+                    <label for="upload-photo">
+                        <input type="file" placeholder="Image" id="upload-photo" (change)="onFileSelected($event)"
+                            accept=".jpg,.png" multiple #addImage>
+                    </label>
+                    <input type="text" placeholder="City" matInput #addCityName>
+                    <button class="polyclinicAdd"
+                        (click)="addPolyclinic(addPolyclinicName.value, addAddress.value, addContactNumber.value,    addCityName.value)">Add</button>
+                </div>
+                <div>
+                    <p class="update">Enter data for update:</p>
+                    <input type="text" placeholder="Polyclinic id" matInput #addPolyclinicId>
+                    <input type="text" placeholder="Polyclinic name" matInput #addPolyclinicName>
+                    <input type="text" placeholder="Address" matInput #addAddress>
+                    <input type="text" placeholder="Contact number" matInput #addContactNumber>
+                    <label for="upload-photo">
+                        <input type="file" placeholder="Image" id="upload-photo" accept=".jpg,.png"
+                            (change)="onFileSelected($event)" multiple #addImage>
+                    </label>
+                    <input type="text" placeholder="City" matInput #addCityName>
+                    <button class="polyclinicAdd"
+                        (click)="updatePolyclinic(addPolyclinicId.value, addPolyclinicName.value, addAddress.value, addContactNumber.value, addCityName.value)">Delete</button>
+                </div>
+                <div>
+                    <p class="delete">Enter data for delete:</p>
+                    <input type="text" placeholder="Polyclinic name" matInput #deletePolyclinicName>
+                    <button class="polyclinicAdd" (click)="deletePolyclinic(deletePolyclinicName.value)">Update</button>
+                </div>
+
+                <p class="models">Doctors</p>
+                <div>
+                    <p class="add">Enter data for add:</p>
+                    <input type="text" placeholder="Doctor fio" matInput #addDoctorName>
+                    <input type="text" placeholder="Admission cost" matInput #addDoctorCost>
+                    <input type="text" placeholder="Contact number" matInput #addDoctorContactNumber>
+                    <input type="text" placeholder="Short description" matInput #addShortDescroption>
+                    <input type="text" placeholder="Full description" matInput #addFullDescription>
+                    <label for="upload-photo">
+                        <input type="file" placeholder="Image" id="upload-photo" (change)="onFileSelected($event)"
+                            accept=".jpg,.png" multiple #addImage>
+                    </label>
+                    <button class="polyclinicAdd"
+                        (click)="addDoctor(addDoctorName.value, addDoctorCost.value, addDoctorContactNumber.value,addShortDescroption.value, addFullDescription.value)">Add</button>
+                </div>
+                <div>
+                    <p class="update">Enter data for update:</p>
+                    <input type="text" placeholder="Doctor fio" matInput #updateDoctorName>
+                    <input type="text" placeholder="Admission cost" matInput #updateDoctorCost>
+                    <input type="text" placeholder="Contact number" matInput #updateDoctorContactNumber>
+                    <input type="text" placeholder="Short description" matInput #updateShortDescroption>
+                    <input type="text" placeholder="Full description" matInput #updateFullDescription>
+                    <label for="upload-photo">
+                        <input type="file" placeholder="Image" id="upload-photo" (change)="onFileSelected($event)"
+                            accept=".jpg,.png" multiple #updateImage>
+                    </label>
+                    <button class="polyclinicAdd"
+                        (click)="updateDoctor(updateDoctorName.value, updateDoctorCost.value, updateDoctorContactNumber.value, updateShortDescroption.value, updateFullDescription.value, updateImage.value)">Delete</button>
+                </div>
+                <div>
+                    <p class="delete">Enter data for delete:</p>
+                    <input type="text" placeholder="Doctor name" matInput #deleteDoctorName>
+                    <button class="polyclinicAdd" (click)="deleteDoctor(deleteDoctorName.value)">Update</button>
+                </div>
+                <p class="models"> Specializations</p>
+                <div>
+                    <p class="add">Enter data for add:</p>
+                    <input type="text" placeholder="Specialization name" matInput #addSpecializationName>
+                    <input type="text" placeholder="Doctor id" matInput #addSpecializationDoctorId>
+                    <input type="text" placeholder="Experience specialization" matInput #addExperienceSpecializationName>
+                    <button class="add" (click)='addSpecialization(addSpecializationName.value, addSpecializationDoctorId.value, addExperienceSpecializationName.value)'>Add</button>
+                </div>
+                <div>
+                    <p class="update">Enter data for update:</p>
+                    <input type="text" placeholder="Specialization name" matInput #updateSpecializationId>
+                    <input type="text" placeholder="Specialization name" matInput #updateSpecializationName>
+                    <input type="text" placeholder="Doctor id" matInput #updateSpecializationDoctorId>
+                    <input type="text" placeholder="Experience specialization" matInput #updateExperienceSpecializationName>
+                    <button class="update" (click)='updateSpecialization(updateSpecializationId.value, updateSpecializationName.value, updateSpecializationDoctorId.value, updateExperienceSpecializationName.value)'>Update</button>
+                </div>
+                <div>
+                    <p class="delete">Enter data for delete:</p>
+                    <input type="text" placeholder="Specialization name" matInput #deleteNameDeleteSpecialization>
+                    <button class="delete" (click)='deleteSpecialization(deleteNameDeleteSpecialization.value)'>Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
