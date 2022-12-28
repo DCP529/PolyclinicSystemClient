@@ -1,11 +1,98 @@
 <div>
 
-    <div class="topnav">
-      <a [routerLink]="['/home']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-        *ngIf='isLoggedIn'>PolyclinicSystem</a>
-        <a [routerLink]="['/home']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-        *ngIf='isAdminPanel'>Edit</a>
+  <div class="topnav">
+    <a class="active" [routerLink]="['/home']" *ngIf='isLoggedIn'>PolyclinicSystem</a>
+    <a href="Edit" [routerLink]="['/edit']" *ngIf='isAdminPanel'>Редактировать</a>
+    <a href="Home" [routerLink]="['/home']" *ngIf='isLoggedIn' (click)='logout()'>Выход</a>
+
+    <div class="search-container">
+      <select type="text" placeholder="Город" #city>
+        <option value="" disabled selected>Выберите город</option>
+        <option *ngFor="let city of cities">{{city.name}}</option>
+      </select>
+      <button type="submit" (click)="searchDoctorsByCity(city.value)"><i class="city-search"></i></button>
     </div>
-    
+
     <router-outlet></router-outlet>
+
   </div>
+
+  <body>
+    <div class="blur">
+      <ul class="specialists">
+        <li class="specialists-item">
+          <a [routerLink]="['/doctors/Нарколог', citySearch]"><img class="specialists-item-img"
+              src="../../../assets/Images/119070.png" alt="vv" width="100%"></a>
+          <div>
+            <h4>Нарколог</h4>
+            <p>{{doctorsCount[0]}} врачей</p>
+          </div>
+        </li>
+        <li class="specialists-item">
+          <a [routerLink]="['/doctors/Лор', citySearch]"><img class="specialists-item-img" src="../../../assets/Images/2785547.png"
+              alt="vv" width="100%"></a>
+          <div>
+            <h4>Лор</h4>
+            <p>{{doctorsCount[1]}} врачей</p>
+          </div>
+        </li>
+        <li class="specialists-item">
+          <a [routerLink]="['/doctors/Алерголог', citySearch]"><img class="specialists-item-img"
+              src="../../../assets/Images/2854222.png" alt="vv" width="100%"></a>
+          <div>
+            <h4>Алерголог</h4>
+            <p>{{doctorsCount[2]}} врачей</p>
+          </div>
+        </li>
+        <li class="specialists-item">
+          <a [routerLink]="['/doctors/Практолог', citySearch]"><img class="specialists-item-img"
+              src="../../../assets/Images/3900495.png" alt="vv" width="100%"></a>
+          <div>
+            <h4>Практолог</h4>
+            <p>{{doctorsCount[3]}} врачей</p>
+          </div>
+        </li>
+        <li class="specialists-item">
+          <a [routerLink]="['/doctors/Гениколог', citySearch]"><img class="specialists-item-img"
+              src="../../../assets/Images/4311309.png" alt="vv" width="100%"></a>
+          <div>
+            <h4>Гениколог</h4>
+            <p>{{doctorsCount[4]}} врачей</p>
+          </div>
+        </li>
+        <li class="specialists-item">
+          <a [routerLink]="['/doctors/Детский врач', citySearch]"><img class="specialists-item-img"
+              src="../../../assets/Images/4751268.png" alt="vv" width="100%"></a>
+          <div>
+            <h4>Детский врач</h4>
+            <p>{{doctorsCount[5]}} врачей</p>
+          </div>
+        </li>
+        <li class="specialists-item">
+          <a [routerLink]="['/doctors/Хирург', citySearch]"><img class="specialists-item-img"
+              src="../../../assets/Images/5793661.png" alt="vv" width="100%"></a>
+          <div>
+            <h4>Хирург</h4>
+            <p>{{doctorsCount[6]}} врачей</p>
+          </div>
+        </li>
+        <li class="specialists-item">
+          <a [routerLink]="['/doctors/Окулист', citySearch]"><img class="specialists-item-img"
+              src="../../../assets/Images/687100.png" alt="vv" width="100%"></a>
+          <div>
+            <h4>Окулист</h4>
+            <p>{{doctorsCount[7]}} врачей</p>
+          </div>
+        </li>
+        <li class="specialists-item">
+          <a [routerLink]="['/doctors/Кардиолог', citySearch]"><img class="specialists-item-img"
+              src="../../../assets/Images/7684996.png" alt="vv" width="100%"></a>
+          <div>
+            <h4>Кардиолог</h4>
+            <p>{{doctorsCount[8]}} врачей</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </body>

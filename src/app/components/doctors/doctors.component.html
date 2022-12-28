@@ -1,0 +1,7 @@
+<div class="topnav">
+        <a href="Home" [routerLink]="['/home']">Назад</a>
+    </div>
+    <body>    
+    <p>{{specializationName}} {{cityName}}</p>
+    <app-doctor-form *ngFor="let p of doctors" [doctor]="p"></app-doctor-form>
+</body>

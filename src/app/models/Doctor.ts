@@ -1,10 +1,15 @@
 import { Guid } from "guid-typescript";
+import { Polyclinic } from "./Polyclinic";
+import { Specialization } from "./Specialization";
 
 export class Doctor{
-    doctorId: Guid | undefined;
-    fio: string |undefined;
-    admissionCost: number | undefined;
-    contactNumber: number | undefined;
-    shortDescription: string | undefined;
-    fullDescription: string | undefined;
+    doctorId!: Guid;
+    fio!: string;
+    admissionCost!: number;
+    contactNumber!: number;
+    shortDescription!: string;
+    fullDescription!: string;
+    polyclinic!: Polyclinic;
+    specializations!: Specialization[];
+    image: any;
 }
