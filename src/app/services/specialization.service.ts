@@ -29,20 +29,16 @@ export class SpecializationService {
   }
 
   addSpecialization(specialization: Specialization): Observable<HttpStatusCode> {
-    return this.http.post<HttpStatusCode>(`${this.baseUrl}?Name=${specialization.name}
-    &DoctorId=${specialization.doctorId}
-    &ExperienceSpecialization=${specialization.experienceSpecialization}`, this.config)
+    console.log('i am!')
+    return this.http.post<HttpStatusCode>(`${this.baseUrl}?Name=${specialization.name}&DoctorId=${specialization.doctorId}&ExperienceSpecialization=${specialization.experienceSpecialization}`, {},this.config)
   }
 
   deleteSpecialization(specializationName: string): Observable<HttpStatusCode> {
-    return this.http.delete<HttpStatusCode>(`${this.baseUrl}?Name=${specializationName}`, this.config)
+    return this.http.delete<HttpStatusCode>(`${this.baseUrl}?specializationName=${specializationName}`, this.config)
   }
 
-  updateSpecialization(specialization: Specialization): Observable<HttpStatusCode> {
-    return this.http.put<HttpStatusCode>(`${this.baseUrl}?SpecializationId=${specialization.specializationId}
-    &Name=${specialization.name}
-    &DoctorId=${specialization.doctorId}
-    &ExperienceSpecialization=${specialization.experienceSpecialization}`, this.config)
+  updateSpecialization(specializationOldName: string, specialization: Specialization): Observable<HttpStatusCode> {
+    return this.http.put<HttpStatusCode>(`${this.baseUrl}?oldName=${specializationOldName}&Name=${specialization.name}&DoctorId=${specialization.doctorId}&ExperienceSpecialization=${specialization.experienceSpecialization}`,{},  this.config)
   }
 }
 

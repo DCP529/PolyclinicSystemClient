@@ -4,10 +4,13 @@ import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
+  template: `<app-doctors><h2>Добро пожаловать {{name}}!</h2></app-doctors>`,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  name = "sdfvgb"
 
   public get isLoggedIn(): boolean {
     return this.as.isAuthenticated()

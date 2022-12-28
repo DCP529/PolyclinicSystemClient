@@ -29,12 +29,10 @@ export class PolyclinicService {
   };
 
   addPolyclinic(polyclinic: Polyclinic, file: File): Observable<HttpStatusCode> {
+    console.log(polyclinic);
     const fd = new FormData();
     fd.append('Image', file);
-    return this.http.post<HttpStatusCode>(`${this.baseUrl}?Name=${polyclinic.name}
-    &Address=${polyclinic.address}
-    &ContactNumber=${polyclinic.contactNumber}
-    &City.Name=${polyclinic.city}`, fd, this.config)
+    return this.http.post<HttpStatusCode>(`${this.baseUrl}?Name=${polyclinic.name}&Address=${polyclinic.address}&ContactNumber=${polyclinic.contactNumber}&CityId=${polyclinic.cityId}&DoctorId=${polyclinic.doctorId}`, fd, this.config)
   }
 
   deletePolyclinic(polyclinic: Polyclinic): Observable<HttpStatusCode> {
@@ -44,11 +42,7 @@ export class PolyclinicService {
   updatePolyclinic(polyclinicId:Guid, name:string, address:string, contactNumber: number, cityName: string, file: File): Observable<HttpStatusCode> {
     const fd = new FormData();
     fd.append('Image', file);
-    return this.http.put<HttpStatusCode>(`${this.baseUrl}?Name=${name}
-    &Address=${address}
-    &polyclinicId=${polyclinicId}
-    &ContactNumber=${contactNumber}
-    &City.Name=${cityName}`, fd, this.config)
+    return this.http.put<HttpStatusCode>(`${this.baseUrl}?Name=${name}&Address=${address}&polyclinicId=${polyclinicId}&ContactNumber=${contactNumber}&City.Name=${cityName}`, fd, this.config)
   }
 
   getImage(polyclinicId: Guid): Observable<ImageBitmap> {

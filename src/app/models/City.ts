@@ -1,6 +1,6 @@
 import { Guid } from "guid-typescript";
 
 export class City{
-    id: Guid | undefined;
+    cityId: Guid | undefined;
     name: string | undefined;
 }

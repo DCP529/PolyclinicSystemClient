@@ -19,6 +19,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { EditComponent } from './components/edit/edit.component';
+import { DoctorsComponent } from './components/doctors/doctors.component';
+import { DoctorFormComponent } from './components/doctor-form/doctor-form.component';
+import { DoctorCardComponent } from './components/doctor-card/doctor-card.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 export function tokenGetter(){
   return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -30,7 +34,10 @@ export function tokenGetter(){
     HomeComponent,
     RegisterComponent,
     LoginComponent,
-    EditComponent
+    EditComponent,
+    DoctorsComponent,
+    DoctorFormComponent,
+    DoctorCardComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +50,8 @@ export function tokenGetter(){
     MatButtonModule,
     MatTableModule,
     MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
 
     JwtModule.forRoot({
       config: {
