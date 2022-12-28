@@ -1,0 +1,10 @@
+<div class="card">
+    <img [src]=doctor.image />
+    <a [routerLink]="['/doctorCard', doctor.doctorId]">
+        <h2>{{doctor.fio}}</h2>
+    </a>    
+    <p>{{doctor.shortDescription}}</p>
+    <p>Специализации:</p>
+    <p *ngFor="let item of doctor.specializations">{{item.name}} - {{item.experienceSpecialization}} лет опыта</p>
+    <p>Стоимость приема: {{doctor.admissionCost}}</p>
+</div>

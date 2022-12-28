@@ -1,0 +1,13 @@
+<div class="topnav">
+    <a href="Home" [routerLink]="['/home']">Домой</a>
+</div>
+
+<div class="card">
+    <img [src]=doctor.image />
+    <h2>ФИО: {{doctor.fio}}</h2>    
+    <p>Специализации:</p>
+    <div *ngFor="let item of doctor.specializations">{{item.name}} - {{item.experienceSpecialization}} лет опыта</div>
+    <p>Полное описание: {{doctor.fullDescription}}</p>
+    <p>Стоимость приема: {{doctor.admissionCost}}</p>
+    <p>Контактный номер: {{doctor.contactNumber}}</p>
+</div>

@@ -26,33 +26,29 @@ export class DoctorService {
     return this.http.get<Doctor[]>(`${this.baseUrl}?FIO=${FIO}&Specialization=${Specialization}`)
   }
 
+  getDoctorById(doctorId: Guid): Observable<Doctor[]> {
+    return this.http.get<Doctor[]>(`${this.baseUrl}?DoctorId=${doctorId}`)
+  }
+
   addDoctor(doctor: Doctor, file: File): Observable<HttpStatusCode> {
     const fd = new FormData();
     fd.append('Image', file);
-    return this.http.post<HttpStatusCode>(`${this.baseUrl}?FIO=${doctor.fio}
-    &AdmissionCost=${doctor.admissionCost}
-    &ContactNumber=${doctor.contactNumber}
-    &ShortDescription=${doctor.shortDescription}
-    &FullDescription=${doctor.fullDescription}`, fd,  this.config)
+    return this.http.post<HttpStatusCode>(`${this.baseUrl}?DoctorId=${doctor.doctorId}&FIO=${doctor.fio}&AdmissionCost=${doctor.admissionCost}&ContactNumber=${doctor.contactNumber}&ShortDescription=${doctor.shortDescription}&FullDescription=${doctor.fullDescription}`, fd, this.config)
   }
 
   deleteDoctor(doctorFIO: string): Observable<HttpStatusCode> {
+    console.log('vefd')
     return this.http.delete<HttpStatusCode>(`${this.baseUrl}?doctorFIO=${doctorFIO}`, this.config)
   }
 
   updateDoctor(doctor: Doctor, file: File): Observable<HttpStatusCode> {
     const fd = new FormData();
     fd.append('Image', file);
-    return this.http.put<HttpStatusCode>(`${this.baseUrl}?DoctorId=${doctor.doctorId}
-    &FIO=${doctor.fio}
-    &AdmissionCost=${doctor.admissionCost}
-    &ContactNumber=${doctor.contactNumber}
-    &ShortDescription=${doctor.shortDescription}
-    &FullDescription=${doctor.fullDescription}`, fd,  this.config)
+    return this.http.put<HttpStatusCode>(`${this.baseUrl}?DoctorId=${doctor.doctorId}&FIO=${doctor.fio}&AdmissionCost=${doctor.admissionCost}&ContactNumber=${doctor.contactNumber}&ShortDescription=${doctor.shortDescription}&FullDescription=${doctor.fullDescription}`, fd, this.config)
   }
 
-  getImage(doctorId: Guid): Observable<ImageBitmap> {
-    return this.http.get<ImageBitmap>(`${this.baseUrl}?doctorId=${doctorId}`)
+  getImage(doctorId: Guid): Observable<Blob> {
+    return this.http.get(`${this.baseUrl}/GetDoctorImageAsync?doctorId=${doctorId}`, { responseType: 'blob' })
   }
 }
 

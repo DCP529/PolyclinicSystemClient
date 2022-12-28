@@ -1,21 +1,45 @@
-<mat-card class="register">
+<mat-card class="register" [formGroup]="form" (ngSubmit)="submit()">
 
   <h2>
-    Registration
+    Регистрация
   </h2>
 
-  <mat-form-field class="form-field">
+  <mat-form-field class="form-field" [ngClass]="{invalid: form.get('email')?.touched && form.get('email')?.invalid}">
     <mat-label>Email</mat-label>
-    <input type="email" name="email" matInput placeholder="user@mail.ru" #email pattern=".+@beststartupever\.com">
+    <input type="email" name="email" matInput placeholder="user@mail.ru" #email formControlName="email">
+    <div *ngIf="form.get('email')?.touched && form.get('email')?.invalid" class="validation">
+      <small *ngIf="form.get('email')?.errors">
+        Неверный email
+      </small>
+    </div>  </mat-form-field>
+
+    <mat-form-field class="form-field"
+    [ngClass]="{invalid: form.get('password')?.touched && form.get('password')?.invalid}">
+    <mat-label>Пароль</mat-label>
+    <input type="password" matInput #password formControlName="password">
+    <div *ngIf="form.get('password')?.touched && form.get('password')?.invalid" class="validation">
+      <small *ngIf="form.get('password')?.errors">
+        Введите в поле password не менее 6 символов
+      </small>
+    </div>
   </mat-form-field>
-  <mat-form-field class="form-field">
-    <mat-label>Password</mat-label>
-    <input type="password" matInput #password>
-  </mat-form-field>
-  <mat-form-field class="form-field">
-    <mat-label>Repeat password</mat-label>
+
+  <mat-form-field class="form-field"
+  [ngClass]="{invalid: form.get('password')?.touched && form.get('password')?.invalid}">
+    <mat-label>Повторите пароль</mat-label>
     <input type="password" matInput #repeatPassword>
+    <div *ngIf="form.get('password')?.touched && form.get('password')?.invalid" class="validation">
+      <small *ngIf="form.get('password')?.errors">
+        Введите в поле password не менее 6 символов
+      </small>
+    </div>
   </mat-form-field>
-  <button mat-flat-button color="primary" (click)='registerQuery(email.value, password.value, repeatPassword.value)'>Register</button>
-  <button mat-flat-button color="primary" (click)='logout()'>Logout</button>
+
+  <button mat-flat-button color="primary" 
+  type="submit"
+  [disabled]="form.invalid"
+    (click)='registerQuery(email.value, password.value, repeatPassword.value)'>Зарегистрироваться</button>
+  <button mat-flat-button color="primary" (click)='logout()'>Назад</button>
+  
 </mat-card>  
+

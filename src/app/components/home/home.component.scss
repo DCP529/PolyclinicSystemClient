@@ -27,23 +27,26 @@
   padding: 16px 16px;
   margin-top: 8px;
   margin-right: 16px;
-  background: #ddd;
   font-size: 17px;
   border: none;
   cursor: pointer;
+  background-color: #333;
+  background-image: url(../../../assets/Images/search_magnifyng_glass_search_locate_icon_124190.png);
 }
 
-.topnav input[type=text] {
+.topnav select[type=text] {
+  size: 30px;
   float: right;
   padding: 6px;
   border: none;
   margin-top: 8px;
   margin-right: 16px;
+  width: 300px;
   font-size: 17px;
 }
 
 .topnav .search-container button:hover {
-  background: rgb(154, 154, 154);
+  background-image: rgb(82, 65, 65);
 }
 
 body {

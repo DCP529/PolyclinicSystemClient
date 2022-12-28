@@ -1,0 +1,28 @@
+img {
+    background-size: cover;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+}
+
+p {
+    font-weight: 700;
+}
+
+a {
+    cursor: pointer;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #eee;
+}
+
+.card {
+    background-color: #fff;
+    width: 300px;
+    border-radius: 20px;
+    padding: 20px;
+    margin-left: 30px;
+    margin-top: 50px;
+}
