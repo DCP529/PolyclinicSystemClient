@@ -14,20 +14,10 @@ export class AuthGuard implements CanActivate {
   
   canActivate() : boolean
   {
-    if(this.as.isAuthenticated())
+    if(!this.as.isAuthenticated())
     {
       this.router.navigate([''])
     }
   return true;
-  }  
-
-  canAdmin() : boolean
-  {
-    if(!this.as.isAdminRole())
-    {
-      this.router.navigate([''])
-    }
-
-    return true;
-  }  
+  }   
 }
