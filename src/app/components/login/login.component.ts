@@ -18,6 +18,7 @@ export class LoginComponent {
   }
 
   login(email: string, password: string) {
+    console.log('fwergthyj')
     this.as.login(email, password)
       .subscribe(res => {
         this.router.navigate(['home']);
