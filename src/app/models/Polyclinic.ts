@@ -3,7 +3,7 @@ import { City } from "./City";
 import { Doctor } from "./Doctor";
 
 export class Polyclinic{
-    polyclinicId: Guid | undefined;
+    polyclinicId!: Guid;
     name!: string;
     address!: string;
     contactNumber!: number;

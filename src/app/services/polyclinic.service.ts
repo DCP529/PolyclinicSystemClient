@@ -39,10 +39,10 @@ export class PolyclinicService {
     return this.http.delete<HttpStatusCode>(`${this.baseUrl}?Name=${polyclinic.name}`, this.config)
   }
 
-  updatePolyclinic(polyclinicId:Guid, name:string, address:string, contactNumber: number, cityName: string, file: File): Observable<HttpStatusCode> {
+  updatePolyclinic(polyclinicId:Guid, name:string, address:string, contactNumber: number, cityId: Guid, file: File): Observable<HttpStatusCode> {
     const fd = new FormData();
     fd.append('Image', file);
-    return this.http.put<HttpStatusCode>(`${this.baseUrl}?Name=${name}&Address=${address}&polyclinicId=${polyclinicId}&ContactNumber=${contactNumber}&City.Name=${cityName}`, fd, this.config)
+    return this.http.put<HttpStatusCode>(`${this.baseUrl}?Name=${name}&Address=${address}&polyclinicId=${polyclinicId}&ContactNumber=${contactNumber}&CityId=${cityId}`, fd, this.config)
   }
 
   getImage(polyclinicId: Guid): Observable<ImageBitmap> {

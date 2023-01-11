@@ -2,7 +2,6 @@ import { Component, ComponentFactoryResolver } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Guid } from 'guid-typescript';
-import { City } from 'src/app/models/City';
 import { Doctor } from 'src/app/models/Doctor';
 import { Polyclinic } from 'src/app/models/Polyclinic';
 import { Specialization } from 'src/app/models/Specialization';
@@ -157,15 +156,21 @@ export class EditComponent {
     })
   }
 
-  updatePolyclinic(polyclinicId: string, name: string, address: string, contactNumber: string, cityName: string) {
+  updatePolyclinic(name: string, address: string, contactNumber: string) {
 
-    this.ps.updatePolyclinic(Guid.parse(polyclinicId), name, address, Number(contactNumber), cityName, this.selectedFile)
+    this.ps.getPolyclinic().subscribe(polyclinics => {
+      console.log(name);
+      console.log(polyclinics);
+   var polyclinic = polyclinics.filter(x => x.name == name)
+console.log(polyclinic);
+    this.ps.updatePolyclinic(polyclinic[0].polyclinicId, name, address, Number(contactNumber), polyclinic[0].cityId, this.selectedFile)
       .subscribe(res => {
-        alert('Polyclinic deleted successfully!')
+        alert('Polyclinic update successfully!')
       }, error => {
         alert('Wrong name or this city already not exists!')
       }
-      )
+      ) 
+    })
   }
 
   deletePolyclinic(name: string) {

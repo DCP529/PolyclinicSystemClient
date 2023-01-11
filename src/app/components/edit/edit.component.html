@@ -42,17 +42,15 @@
                 </div>
                 <div>
                     <p class="update">Введите данные для обновления:</p>
-                    <input type="text" placeholder="Id поликлиники" matInput #addPolyclinicId>
-                    <input type="text" placeholder="Название поликлиники" matInput #addPolyclinicName>
-                    <input type="text" placeholder="Адрес" matInput #addAddress>
-                    <input type="text" placeholder="Контактный номер" matInput #addContactNumber>
+                    <input type="text" placeholder="Название поликлиники" matInput #updatePolyclinicName>
+                    <input type="text" placeholder="Адрес" matInput #updateAddress>
+                    <input type="text" placeholder="Контактный номер" matInput #updateContactNumber>
                     <label for="Выберите фото">
                         <input type="file" placeholder="Image" id="upload-photo" accept=".jpg,.png"
-                            (change)="onFileSelected($event)" multiple #addImage>
+                            (change)="onFileSelected($event)" multiple #updateImage>
                     </label>
-                    <input type="text" placeholder="Город" matInput #addCityName>
                     <button class="polyclinicAdd"
-                        (click)="updatePolyclinic(addPolyclinicId.value, addPolyclinicName.value, addAddress.value, addContactNumber.value, addCityName.value)">Обновить</button>
+                        (click)="updatePolyclinic(updatePolyclinicName.value, updateAddress.value, updateContactNumber.value)">Обновить</button>
                 </div>
                 <div>
                     <p class="delete">введите данные для удаления:</p>
