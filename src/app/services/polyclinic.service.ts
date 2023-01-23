@@ -4,6 +4,7 @@ import { platformBrowser } from '@angular/platform-browser';
 import { Guid } from 'guid-typescript';
 import { Observable } from 'rxjs';
 import { STORE_API_URL } from '../app-injection-tokens';
+import { Doctor } from '../models/Doctor';
 import { Polyclinic } from '../models/Polyclinic';
 import { AuthService } from './auth.service';
 
@@ -29,24 +30,32 @@ export class PolyclinicService {
   };
 
   addPolyclinic(polyclinic: Polyclinic, file: File): Observable<HttpStatusCode> {
-    console.log(polyclinic);
     const fd = new FormData();
     fd.append('Image', file);
-    return this.http.post<HttpStatusCode>(`${this.baseUrl}?Name=${polyclinic.name}&Address=${polyclinic.address}&ContactNumber=${polyclinic.contactNumber}&CityId=${polyclinic.cityId}&DoctorId=${polyclinic.doctorId}`, fd, this.config)
+    return this.http.post<HttpStatusCode>(`${this.baseUrl}?Name=${polyclinic.name}&Address=${polyclinic.address}&ContactNumber=${polyclinic.contactNumber}`, fd, this.config)
+  }
+
+  addDoctorForPolyclinic(polyclinic: Polyclinic, doctor: Doctor) : Observable<HttpStatusCode>{ 
+    return this.http.post<HttpStatusCode>(`${this.baseUrl}/AddDoctorForPolyclinic?polyclinicId=${polyclinic.polyclinicId}&DoctorId=${doctor.doctorId}&FIO=${doctor.fio}&AdmissionCost=${doctor.admissionCost}&ContactNumber=${doctor.contactNumber}&ShortDescription=${doctor.shortDescription}}&FullDescription=${doctor.fullDescription}&Archived=false`, {}, this.config)
   }
 
   deletePolyclinic(polyclinic: Polyclinic): Observable<HttpStatusCode> {
     return this.http.delete<HttpStatusCode>(`${this.baseUrl}?Name=${polyclinic.name}`, this.config)
   }
 
-  updatePolyclinic(polyclinicId:Guid, name:string, address:string, contactNumber: number, cityId: Guid, file: File): Observable<HttpStatusCode> {
-    const fd = new FormData();
-    fd.append('Image', file);
-    return this.http.put<HttpStatusCode>(`${this.baseUrl}?Name=${name}&Address=${address}&polyclinicId=${polyclinicId}&ContactNumber=${contactNumber}&CityId=${cityId}`, fd, this.config)
+  deleteDoctorForPolyclinic(polyclinic: Polyclinic, doctor: Doctor){
+    return this.http.delete<HttpStatusCode>(`${this.baseUrl}/DeleteDoctorForPolyclinic?polyclinicId=${polyclinic.polyclinicId}&doctorId=${doctor.doctorId}`, this.config)
   }
 
-  getImage(polyclinicId: Guid): Observable<ImageBitmap> {
-    return this.http.get<ImageBitmap>(`${this.baseUrl}?polyclinicId=${polyclinicId}`, this.config)
+  updatePolyclinic(polyclinicId: Guid, polyclinic: Polyclinic, file: File): Observable<HttpStatusCode> {
+    const fd = new FormData();
+    fd.append('Image', file);
+
+    return this.http.put<HttpStatusCode>(`${this.baseUrl}?Name=${polyclinic.name}&Address=${polyclinic.address}&polyclinicId=${polyclinicId}&ContactNumber=${polyclinic.contactNumber}&CityId=${polyclinic.cityId}`, fd, this.config)
+  }
+
+  getImage(polyclinicId: Guid): Observable<Blob> {
+    return this.http.get(`${this.baseUrl}/GetPolyclinicImageAsync?polyclinicId=${polyclinicId}`, { responseType: 'blob' })
   }
 }
 

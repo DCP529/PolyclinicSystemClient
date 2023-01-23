@@ -9,58 +9,35 @@
             <div class="tools">
 
                 <p class="models">Города</p>
-                <div>
+                <app-city-edit-card *ngFor="let c of cities" [city]="c"></app-city-edit-card>
+                 <div>
                     <p class="add">Введите даннные для добавления:</p>
                     <input type="text" placeholder="Название города" matInput #addName>
                     <button class="add" (click)='addCity(addName.value)'>Добавить</button>
                 </div>
-                <div>
-                    <p class="update">Введите даннные для обновления города:</p>
-                    <input type="text" placeholder="Название города который хотите изменить" matInput #cityName>
-                    <input type="text" placeholder="Название города" matInput #updateName>
-                    <button class="update" (click)='updateCity(cityName.value, updateName.value)'>Обновить</button>
-                </div>
-                <div>
-                    <p class="delete">Введите название города для его удаления:</p>
-                    <input type="text" placeholder="Название города" matInput #deleteName>
-                    <button class="delete" (click)='deleteCity(deleteName.value)'>Удалить</button>
-                </div>
+
                 <p class="models">Поликлиники</p>
+                <app-polyclinic-edit-card *ngFor="let p of polyclinics" [polyclinic]="p" [selectedFile]="p.image" [cityId]="p.cityId"></app-polyclinic-edit-card>
                 <div>
                     <p class="add">Введите данные для добавления:</p>
                     <input type="text" placeholder="Название полилиники" matInput #addPolyclinicName>
                     <input type="text" placeholder="Адрес" matInput #addAddress>
-                    <input type="text" placeholder="Контактный номер" matInput #addContactNumber>                    
-                    <input type="text" placeholder="ФИО доктора" matInput #addDoctorForPolyclinic>
+                    <input type="text" placeholder="Контактный номер" matInput #addContactNumber>  
                     <label for="Выберите фото">
                         <input type="file" placeholder="Image" id="upload-photo" (change)="onFileSelected($event)"
                             accept=".jpg,.png" multiple #addImage>
                     </label>
                     <input type="text" placeholder="Город" matInput #addCityName>
-                    <button class="polyclinicAdd"
-                        (click)="addPolyclinic(addPolyclinicName.value, addAddress.value, addContactNumber.value, addCityName.value, addDoctorForPolyclinic.value)">Добавить</button>
-                </div>
-                <div>
-                    <p class="update">Введите данные для обновления:</p>
-                    <input type="text" placeholder="Название поликлиники" matInput #updatePolyclinicName>
-                    <input type="text" placeholder="Адрес" matInput #updateAddress>
-                    <input type="text" placeholder="Контактный номер" matInput #updateContactNumber>
-                    <label for="Выберите фото">
-                        <input type="file" placeholder="Image" id="upload-photo" accept=".jpg,.png"
-                            (change)="onFileSelected($event)" multiple #updateImage>
-                    </label>
-                    <button class="polyclinicAdd"
-                        (click)="updatePolyclinic(updatePolyclinicName.value, updateAddress.value, updateContactNumber.value)">Обновить</button>
-                </div>
-                <div>
-                    <p class="delete">введите данные для удаления:</p>
-                    <input type="text" placeholder="Название поликлиники" matInput #deletePolyclinicName>
-                    <button class="polyclinicAdd" (click)="deletePolyclinic(deletePolyclinicName.value)">Удалить</button>
+                    <button class="polyclinicAdd" (click)="addPolyclinic(addPolyclinicName.value, addAddress.value, addContactNumber.value, addCityName.value)">Добавить</button><p></p>
+                    <input type="text" placeholder="Название полилиники" matInput #PolyclinicName>
+                    <input type="text" placeholder="ФИО доктора" matInput #addDoctorForPolyclinic>
+                    <button (click)="addsDoctorForPolyclinic(PolyclinicName.value, addDoctorForPolyclinic.value)">Добавить</button>
                 </div>
 
                 <p class="models">Доктора</p>
+                <app-doctor-edit-card *ngFor="let d of doctors" [doctor]="d" [selectedFile]="d.image"></app-doctor-edit-card>
                 <div>
-                    <p class="add">введите данные для добавления:</p>
+                    <p class="add">Введите данные для добавления:</p>
                     <input type="text" placeholder="ФИО доктора" matInput #addDoctorName>
                     <input type="text" placeholder="Стоимость приема" matInput #addDoctorCost>
                     <input type="text" placeholder="Контактный номер" matInput #addDoctorContactNumber>
@@ -70,52 +47,17 @@
                         <input type="file" placeholder="Image" id="upload-photo" (change)="onFileSelected($event)"
                             accept=".jpg,.png" multiple #addImage>
                     </label>
-                    <button class="polyclinicAdd"
-                        (click)="addDoctor(addDoctorName.value, addDoctorCost.value, addDoctorContactNumber.value,addShortDescroption.value, addFullDescription.value)">Добавить</button>
+                    <button class="polyclinicAdd" (click)="addDoctor(addDoctorName.value, addDoctorCost.value, addDoctorContactNumber.value,addShortDescroption.value, addFullDescription.value)">Добавить</button>
                 </div>
-                <div>
-                    <p class="update">Введите данные для добавления:</p>
-                    <input type="text" placeholder="ФИО доктора" matInput #updateDoctorName>
-                    <input type="text" placeholder="Стоимость приема" matInput #updateDoctorCost>
-                    <input type="text" placeholder="Контактный номер" matInput #updateDoctorContactNumber>
-                    <input type="text" placeholder="Краткое описание" matInput #updateShortDescroption>
-                    <input type="text" placeholder="Полное описание" matInput #updateFullDescription>
-                    <label for="Выберите фото">
-                        <input type="file" placeholder="Image" id="upload-photo" (change)="onFileSelected($event)"
-                            accept=".jpg,.png" multiple #updateImage>
-                    </label>
-                    <button class="polyclinicAdd"
-                        (click)="updateDoctor(updateDoctorName.value, updateDoctorCost.value, updateDoctorContactNumber.value, updateShortDescroption.value, updateFullDescription.value)">Обновить</button>
-                </div>
-                <div>
-                    <p class="delete">Введите данные для удаления:</p>
-                    <input type="text" placeholder="ФИО доктора" matInput #deleteDoctorName>
-                    <button class="polyclinicAdd" (click)="deleteDoctor(deleteDoctorName.value)">Удалить</button>
-                </div>
+
                 <p class="models">Специализации</p>
+                <app-specialization-edit-card *ngFor="let s of specializations" [specialization]="s" [doctorId]="s.doctorId"></app-specialization-edit-card>
                 <div>
                     <p class="add">Введите данные для добавления:</p>
                     <input type="text" placeholder="Название специализации" matInput #addSpecializationName>
                     <input type="text" placeholder="ФИО доктора" matInput #addSpecializationDoctorFIO>
                     <input type="text" placeholder="Опыт в специализации" matInput #addExperienceSpecializationName>
-                    <button class="add"
-                        (click)='addSpecialization(addSpecializationName.value, addSpecializationDoctorFIO.value, addExperienceSpecializationName.value)'>Добавить</button>
-                </div>
-                <div>
-                    <p class="update">Введите данные для обновления:</p>
-                    <input type="text" placeholder="Название старой специализации" matInput #updateSpecializationId>
-                    <input type="text" placeholder="Название обновленной специализвации" matInput #updateSpecializationName>
-                    <input type="text" placeholder="Имя доктора" matInput #updateSpecializationDoctorId>
-                    <input type="text" placeholder="Опыт в специализации" matInput
-                        #updateExperienceSpecializationName>
-                    <button class="update"
-                        (click)='updateSpecialization(updateSpecializationId.value, updateSpecializationName.value, updateSpecializationDoctorId.value, updateExperienceSpecializationName.value)'>Обновить</button>
-                </div>
-                <div>
-                    <p class="delete">Введите данные для удаления:</p>
-                    <input type="text" placeholder="Название специализации" matInput #deleteNameDeleteSpecialization>
-                    <button class="delete"
-                        (click)='deleteSpecialization(deleteNameDeleteSpecialization.value)'>Удалить</button>
+                    <button class="add" (click)='addSpecialization(addSpecializationName.value, addSpecializationDoctorFIO.value, addExperienceSpecializationName.value)'>Добавить</button>
                 </div>
             </div>
         </div>

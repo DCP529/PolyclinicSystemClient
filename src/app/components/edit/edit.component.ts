@@ -1,7 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ComponentFactoryResolver } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Guid } from 'guid-typescript';
+import { City } from 'src/app/models/City';
 import { Doctor } from 'src/app/models/Doctor';
 import { Polyclinic } from 'src/app/models/Polyclinic';
 import { Specialization } from 'src/app/models/Specialization';
@@ -20,7 +23,11 @@ export class EditComponent {
 
   selectedFile!: File;
 
-  private doctor: Doctor[] = []
+  doctors: Doctor[] = []
+  specializations: Specialization[] = []
+  polyclinics: Polyclinic[] = []
+  cities: City[] = []
+  doctorName: string[] = []
 
   constructor(
     private jwtHelper: JwtHelperService,
@@ -30,12 +37,41 @@ export class EditComponent {
     private ss: SpecializationService,
     private as: AuthService,
     private router: Router
-  ) { 
+  ) {
     var result = this.jwtHelper.decodeToken(this.as.isAdminRole());
 
     if (result.role == "User") {
       this.router.navigate(['/home']);
     }
+
+    ss.getSpecialization().subscribe(x => this.specializations = x);
+    cs.getCities().subscribe(x => this.cities = x);
+
+    ps.getPolyclinic().subscribe(x => {
+      this.polyclinics = x
+      this.polyclinics.forEach(x => {
+        this.ps.getImage(x.polyclinicId).subscribe((image: Blob) => {
+          x.image = image;
+        }, (err: HttpErrorResponse) => {
+          console.log(err)
+        })
+      })
+    });
+
+    ds.getDoctor("", "").subscribe(x => {
+      this.doctors = x
+      this.doctors.forEach(x => {
+        this.doctorName.push(x.fio);
+        this.ds.getImage(x.doctorId).subscribe((image: Blob) => {
+          this.ss.getSpecialization().subscribe(z => {
+            x.specializations = z.filter(item => item.doctorId == x.doctorId)
+          })
+          x.image = image;
+        }, (err: HttpErrorResponse) => {
+          console.log(err)
+        })
+      })
+    });
   }
 
   addCity(cityName: string) {
@@ -46,28 +82,6 @@ export class EditComponent {
         this.router.navigate(['edit']);
       }, error => {
         alert('Wrong name or this city already exists!')
-      }
-      )
-  }
-
-  updateCity(cityName: string, updateName: string) {
-
-    return this.cs.updateCities(cityName, updateName)
-      .subscribe(res => {
-        alert('City updated successfully!')
-        this.router.navigate(['edit']);
-      }, error => {
-        alert('Wrong name or id!')
-      }
-      )
-  }
-
-  deleteCity(cityName: string) {
-    return this.cs.deleteCities(cityName)
-      .subscribe(res => {
-        alert('City deleted successfully!')
-      }, error => {
-        alert('Wrong name or this city already not exists!')
       }
       )
   }
@@ -92,42 +106,7 @@ export class EditComponent {
     });
   }
 
-  updateSpecialization(specializationOldName: string, name: string, doctorName: string, experience: string) {
-
-    var specialization = new Specialization();
-    specialization.name = name;
-    specialization.experienceSpecialization = Number(experience)
-
-    this.ds.getDoctor(doctorName, '').subscribe(doctor => {
-      doctor.forEach(x => {
-        console.log(x)
-        specialization.doctorId = x.doctorId
-
-        return this.ss.updateSpecialization(specializationOldName, specialization)
-          .subscribe(res => {
-            alert('Specialization updated successfully!')
-            this.router.navigate(['edit']);
-          }, error => {
-            alert('Wrong parameters!')
-          })
-      })
-    });
-
-
-  }
-
-  deleteSpecialization(specializationName: string) {
-    console.log(specializationName)
-    return this.ss.deleteSpecialization(specializationName)
-      .subscribe(res => {
-        alert('Specialization deleted successfully!')
-      }, error => {
-        alert('Wrong name or this specialization already not exists!')
-      }
-      )
-  }
-
-  addPolyclinic(name: string, address: string, contactNumber: string, cityName: string, doctorName: string) {
+  addPolyclinic(name: string, address: string, contactNumber: string, cityName: string) {
     var polyclinic = new Polyclinic();
     polyclinic.name = name
     polyclinic.address = address
@@ -140,51 +119,32 @@ export class EditComponent {
           polyclinic.cityId = x.cityId
         }
       })
-
-      this.ds.getDoctor(doctorName, '').subscribe(doctor => {
-
-        polyclinic.doctorId = doctor[0].doctorId
-
-        return this.ps.addPolyclinic(polyclinic, this.selectedFile)
-          .subscribe(res => {
-            alert('Polyclinic added successfully!')
-          }, error => {
-            alert('Wrong name or this city already not exists!')
-          }
-          )
-      });
-    })
+      return this.ps.addPolyclinic(polyclinic, this.selectedFile)
+        .subscribe(res => {
+          alert('Polyclinic added successfully!')
+        }, error => {
+          alert('Wrong name or this city already not exists!')
+        }
+        )
+    });
   }
 
-  updatePolyclinic(name: string, address: string, contactNumber: string) {
+  addsDoctorForPolyclinic(polyclinicName: string, doctorName: string) {
 
-    this.ps.getPolyclinic().subscribe(polyclinics => {
-      console.log(name);
-      console.log(polyclinics);
-   var polyclinic = polyclinics.filter(x => x.name == name)
-console.log(polyclinic);
-    this.ps.updatePolyclinic(polyclinic[0].polyclinicId, name, address, Number(contactNumber), polyclinic[0].cityId, this.selectedFile)
-      .subscribe(res => {
-        alert('Polyclinic update successfully!')
-      }, error => {
-        alert('Wrong name or this city already not exists!')
-      }
-      ) 
-    })
-  }
+    this.ps.getPolyclinic().subscribe(x => {
+      this.ds.getDoctor(doctorName, '').subscribe(d => {
+            var polyclinics;
+            polyclinics = x
+            polyclinics.filter(c => c.name == polyclinicName)
 
-  deletePolyclinic(name: string) {
-
-    var polyclinic = new Polyclinic();
-    polyclinic.name = name
-
-    this.ps.deletePolyclinic(polyclinic)
-      .subscribe(res => {
-        alert('Polyclinic deleted successfully!')
-      }, error => {
-        alert('Wrong name or this city already not exists!')
-      }
-      )
+            return this.ps.addDoctorForPolyclinic(polyclinics[0], d[0]).subscribe(res => {
+              alert('Polyclinic added successfully!')
+            }, error => {
+              alert('Wrong name or this city already not exists!')
+            }
+            )
+          })
+        })
   }
 
   addDoctor(doctorName: string, admissionCost: string, contactNumber: string, shortDescription: string, fullDescription: string) {
@@ -200,34 +160,6 @@ console.log(polyclinic);
     return this.ds.addDoctor(doctor, this.selectedFile)
       .subscribe(res => {
         alert('Doctor added successfully!')
-      }, error => {
-        alert('Wrong name or this city already not exists!')
-      }
-      )
-  }
-
-  updateDoctor(name: string, admissionCost: string, contactNumber: string, shortDescription: string, fullDescription: string) {
-
-    var doctor = new Doctor();
-    doctor.fio = name
-    doctor.admissionCost = Number(admissionCost)
-    doctor.contactNumber = Number(contactNumber)
-    doctor.shortDescription = shortDescription
-    doctor.fullDescription = fullDescription
-
-    return this.ds.updateDoctor(doctor, this.selectedFile)
-      .subscribe(res => {
-        alert('Doctor added successfully!')
-      }, error => {
-        alert('Wrong name or this city already not exists!')
-      }
-      )
-  }
-
-  deleteDoctor(name: string) {
-    this.ds.deleteDoctor(name)
-      .subscribe(res => {
-        alert('Doctor deleted successfully!')
       }, error => {
         alert('Wrong name or this city already not exists!')
       }

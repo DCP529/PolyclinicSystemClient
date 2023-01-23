@@ -1,0 +1,21 @@
+<div class="card" *ngIf="ViewImage()">
+    <img [src]=image />
+     <label for="Выберите фото">
+        <input type="file" placeholder="Image" id="upload-photo" (change)="onFileSelected($event)"
+            accept=".jpg,.png" multiple #addImage>
+    </label> 
+    <div class="editInfo">
+    <p>ФИО: </p>
+    <input type="text" value="{{doctor.fio}}" matInput #name>
+    <p>Краткое описание: </p>
+    <input type="text" value="{{doctor.shortDescription}}" matInput #shortDescription>
+    <p>Полное описание: </p>
+    <input type="text" value="{{doctor.fullDescription}}" matInput #fullDescription>
+    <p>Стоимость приема: </p>
+    <input type="text" value="{{doctor.admissionCost}}" matInput #admissionCost>
+    <p>Контактный номер: </p>
+    <input type="text" value="{{doctor.contactNumber}}" matInput #contactNumber>
+    <p><button class="polyclinicAdd" (click)="updateDoctor(name.value, admissionCost.value, contactNumber.value, shortDescription.value, fullDescription.value)">Обновить</button>
+    <button class="polyclinicAdd" (click)="deleteDoctor()">Удалить</button>
+</div>
+</div>

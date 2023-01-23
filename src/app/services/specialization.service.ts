@@ -1,7 +1,7 @@
 import { HttpClient, HttpStatusCode } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Guid } from 'guid-typescript';
-import { Observable } from 'rxjs';
+import { concatWith, Observable } from 'rxjs';
 import { STORE_API_URL } from '../app-injection-tokens';
 import { Specialization } from '../models/Specialization';
 import { AuthService } from './auth.service';
@@ -38,7 +38,7 @@ export class SpecializationService {
   }
 
   updateSpecialization(specializationOldName: string, specialization: Specialization): Observable<HttpStatusCode> {
-    return this.http.put<HttpStatusCode>(`${this.baseUrl}?oldName=${specializationOldName}&Name=${specialization.name}&DoctorId=${specialization.doctorId}&ExperienceSpecialization=${specialization.experienceSpecialization}`,{},  this.config)
+    return this.http.put<HttpStatusCode>(`${this.baseUrl}?oldName=${specializationOldName}&SpecializationId=${specialization.specializationId}&Name=${specialization.name}&DoctorId=${specialization.doctorId}&ExperienceSpecialization=${specialization.experienceSpecialization}`,{},  this.config)
   }
 }
 

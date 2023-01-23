@@ -23,6 +23,10 @@ import { DoctorsComponent } from './components/doctors/doctors.component';
 import { DoctorFormComponent } from './components/doctor-form/doctor-form.component';
 import { DoctorCardComponent } from './components/doctor-card/doctor-card.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DoctorEditCardComponent } from './components/doctor-edit-card/doctor-edit-card.component';
+import { PolyclinicEditCardComponent } from './components/polyclinic-edit-card/polyclinic-edit-card.component';
+import { CityEditCardComponent } from './components/city-edit-card/city-edit-card.component';
+import { SpecializationEditCardComponent } from './components/specialization-edit-card/specialization-edit-card.component';
 
 export function tokenGetter(){
   return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -37,7 +41,11 @@ export function tokenGetter(){
     EditComponent,
     DoctorsComponent,
     DoctorFormComponent,
-    DoctorCardComponent
+    DoctorCardComponent,
+    DoctorEditCardComponent,
+    PolyclinicEditCardComponent,
+    CityEditCardComponent,
+    SpecializationEditCardComponent
   ],
   imports: [
     BrowserModule,

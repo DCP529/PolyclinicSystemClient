@@ -1,0 +1,7 @@
+<div class="card">
+    <h2>Город: <input type="text" value="{{city.name}}" matInput #name></h2>
+    <div class="editInfo">
+        <button class="update" (click)='updateCity(name.value)'>Обновить</button>
+        <button class="delete" (click)='deleteCity(name.value)'>Удалить</button>
+    </div>
+</div>

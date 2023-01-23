@@ -12,4 +12,5 @@ export class Doctor{
     polyclinic!: Polyclinic;
     specializations!: Specialization[];
     image: any;
+    archived!: boolean
 }

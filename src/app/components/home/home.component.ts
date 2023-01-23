@@ -82,7 +82,7 @@ export class HomeComponent {
 
         this.ds.getDoctor('', '').subscribe(getDoctors => {
           polyclinics.forEach(element => {
-            var doctors = getDoctors.filter(getDoctors => getDoctors.doctorId == element.doctorId);
+            var doctors = element.doctors
 
             doctors.forEach(item => {
               this.doctors.push(item)

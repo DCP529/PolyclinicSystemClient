@@ -37,7 +37,6 @@ export class DoctorService {
   }
 
   deleteDoctor(doctorFIO: string): Observable<HttpStatusCode> {
-    console.log('vefd')
     return this.http.delete<HttpStatusCode>(`${this.baseUrl}?doctorFIO=${doctorFIO}`, this.config)
   }
 

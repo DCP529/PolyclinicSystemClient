@@ -1,0 +1,13 @@
+<div class="card">
+    <p>Специализация: </p>
+    <input type="text" value="{{specialization.name}}" matInput #updateSpecializationName>
+    <p>ФИО доктора: </p>
+    <input type="text" value="{{doctorName}}" matInput #name>
+    <p>Опыт в специализации: </p>
+    <input type="text" value="{{specialization.experienceSpecialization}}" matInput #experience><p>
+    <div class="editInfo">
+        <button class="update"
+            (click)='updateSpecialization(updateSpecializationName.value, name.value, experience.value)'>Обновить</button>
+        <button class="delete" (click)='deleteSpecialization()'>Удалить</button>
+    </div>
+</div>

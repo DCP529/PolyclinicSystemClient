@@ -1,5 +1,4 @@
 import { Guid } from "guid-typescript";
-import { City } from "./City";
 import { Doctor } from "./Doctor";
 
 export class Polyclinic{
@@ -7,7 +6,7 @@ export class Polyclinic{
     name!: string;
     address!: string;
     contactNumber!: number;
-    image!: File;
+    image: any;
     cityId!: Guid;
-    doctorId!: Guid;
+    doctors!: Doctor[];
 }

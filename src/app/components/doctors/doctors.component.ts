@@ -56,12 +56,12 @@ export class DoctorsComponent {
   
           this.ds.getDoctor('', this.specializationName).subscribe(getDoctors => {
             polyclinics.forEach(element => {
-              var doctors = getDoctors.filter(getDoctors => getDoctors.doctorId == element.doctorId);
+              element.doctors.forEach(element => {
+                var doctors = getDoctors.filter(getDoctors => getDoctors == element);
               doctors.forEach(item => {
-                console.log(item);
                 this.doctors.push(item)
-                console.log('3')
               })
+              });              
             });
   
             this.doctors.forEach(x => {
