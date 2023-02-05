@@ -27,7 +27,8 @@ export class PolyclinicEditCardComponent {
     this.polyclinic.image = this.selectedFile;
     this.image = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(this.polyclinic.image));
 
-    this.cs.getCities().subscribe(x => this.city = x.filter(x => x.cityId == this.cityId)[0])
+    this.cs.getCities().subscribe(x => {
+      this.city = x.filter(x => x.cityId == this.cityId)[0]})
     return true;
   }
 

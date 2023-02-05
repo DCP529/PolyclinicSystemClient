@@ -94,7 +94,7 @@ export class HomeComponent {
           for (var i = 0; i < this.doctorSpecialization.length; i++) {
             this.ds.getDoctor('', this.doctorSpecialization[i]).subscribe(doctors => {
               if (doctors.length != 0) {
-                for (var i = 0; i < this.doctors.length; i++) {
+                for (var i = 0; i <= this.doctors.length; i++) {
                   var result = this.doctors.filter(doctor => doctor.doctorId == doctors[i].doctorId)
                   this.doctorsCount.push(result.length)
                 }

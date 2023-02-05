@@ -93,6 +93,7 @@ export class EditComponent {
     specialization.experienceSpecialization = Number(experience)
 
     this.ds.getDoctor(doctorFIO, "").subscribe(data => {
+      if(data != undefined)
       specialization.doctorId = data[0].doctorId;
 
       return this.ss.addSpecialization(specialization)
